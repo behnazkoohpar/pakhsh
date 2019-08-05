@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimary"
+    tools:Context="com.koohpar.dstrbt.ui.activation.ActivationActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.koohpar.dstrbt.ui.activation.ActivationViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_text"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:src="@drawable/logo" />
+
+            <TextView
+                android:id="@+id/user_name_text"
+                style="@style/AppTheme.TextViewWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/activation_text" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large">
+
+                <EditText
+                    android:id="@+id/activation"
+                    style="@style/AppTheme.EditTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:autoText="false"
+                    android:gravity="right"
+                    android:imeOptions="actionDone"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+                <ImageView
+                    android:id="@+id/clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:onClick="@{()->viewModel.onCallClearActivation()}"
+                    android:src="@drawable/clear" />
+            </RelativeLayout>
+
+            <Button
+                style="@style/AppTheme.ButtonAccentColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:imeOptions="actionDone"
+                android:onClick="@{() -> viewModel.onActivationClick()}"
+                android:text="@string/send" />
+            <LinearLayout
+                android:id="@+id/smsNotRecieve"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <TextView
+                    android:id="@+id/txtNotRecieveCode"
+                    style="@style/AppTheme.TextViewLableGreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textSize="@dimen/font_size_large"
+                    android:gravity="center"
+                    android:onClick="@{() -> viewModel.reSendCode()}"
+                    android:text="@string/txt_dont_recieve_code"/>
+
+                <TextView
+                    android:id="@+id/txtCallCenter"
+                    style="@style/AppTheme.TextViewLableGreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/font_size_large"
+                    android:onClick="@{() -> viewModel.callToCenter()}"
+                    android:text="@string/txt_call_center"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/smsTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <TextView
+                    style="@style/AppTheme.TextViewLableBlack"
+                    android:id="@+id/timerText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="00:00"
+                    android:gravity="center"
+                    android:textSize="@dimen/font_size_xxlarge"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

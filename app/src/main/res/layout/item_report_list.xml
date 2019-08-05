@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.koohpar.dstrbt.ui.reportList.ReportListItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_report_list_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_mini_small"
+            android:background="@color/white"
+            app:cardCornerRadius="@dimen/radius_5dp"
+            app:cardElevation="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtNumFactor"
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/num_factor"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/txtNumFactor"
+                        android:text="@{viewModel.numberFactor}"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtDateFactor"
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/date_factor"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/txtDateFactor"
+                        android:text="@{viewModel.dateFactor}"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtStateFactor"
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/state_factor"
+                        android:textAlignment="center"
+                        android:textColor="@color/red_color"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/txtStateFactor"
+                        android:text="@{viewModel.stateFactor}"
+                        android:textAlignment="center"
+                        android:textColor="@color/red_color"
+                        android:textSize="@dimen/font_size_small" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtSumFactor"
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/sum_factor"
+                        android:textAlignment="center"
+                        android:textColor="@color/green_800"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/txtSumFactor"
+                        android:text="@{viewModel.sumFactor}"
+                        android:textAlignment="center"
+                        android:textColor="@color/green_800"
+                        android:textSize="@dimen/font_size_small" />
+                </RelativeLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</layout>

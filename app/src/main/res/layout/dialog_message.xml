@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_alert"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/btn_alert_ok"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:background="@drawable/bg_white">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/logo"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/tv_alert_title"
+            style="@style/AppTheme.TextViewLableBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title"
+            android:layout_below="@+id/img"
+            android:textAlignment="center" />
+
+
+        <TextView
+            android:id="@+id/tv_alert_message"
+            style="@style/AppTheme.TextViewLableBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_alert_title"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@string/text"
+            android:textAlignment="center" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.koohpar.dstrbt.ui.detailReportList.DetailReportListItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_report_list_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_mini_small"
+            android:background="@color/white"
+            app:cardCornerRadius="@dimen/radius_5dp"
+            app:cardElevation="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtName"
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/name_stuff"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/txtName"
+                        android:text="@{viewModel.nameStuff}"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textconsumerPrice"
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/fee"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/margin_normal"
+                        android:layout_toLeftOf="@+id/textconsumerPrice"
+                        android:text="@{viewModel.consumerPrice}"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/offer"
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@{viewModel.offer}"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        android:id="@+id/textoffer"
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/offer"
+                        android:text="@string/percent"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtPrice"
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/pricee"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        android:id="@+id/price"
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/txtPrice"
+                        android:textColor="@color/red_color"
+                        android:text="@{viewModel.price}"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/red_color"
+                        android:layout_marginRight="@dimen/margin_normal"
+                        android:layout_toLeftOf="@+id/price"
+                        android:text="@string/rial" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtSumPrice"
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/sumer"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        android:id="@+id/sumprice"
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/txtSumPrice"
+                        android:text="@{viewModel.sumprice}"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+
+
+                    <TextView
+                        android:id="@+id/txtNumber"
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/margin_large"
+                        android:layout_toLeftOf="@+id/sumprice"
+                        android:text="@string/numberr"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        style="@style/AppTheme.TextViewLableBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/txtNumber"
+                        android:text="@{viewModel.number}"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <ImageView
+                        android:id="@+id/delete"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="13dp"
+                        android:src="@drawable/delete2"
+                        android:visibility="@{viewModel.isDelete ? View.VISIBLE: View.GONE}" />
+
+                    <ImageView
+                        android:id="@+id/edit"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:layout_toRightOf="@+id/delete"
+                        android:src="@drawable/edit"
+                        android:visibility="@{viewModel.isEdit ? View.VISIBLE: View.GONE}" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</layout>

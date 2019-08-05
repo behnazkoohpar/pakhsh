@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimary"
+    tools:Context="com.koohpar.dstrbt.ui.login.LoginActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.koohpar.dstrbt.ui.login.LoginViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/login_text"
+            style="@style/AppTheme.TextViewTitleWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/login_title" />
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_text"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:src="@drawable/logo" />
+
+            <TextView
+                android:id="@+id/user_name_text"
+                style="@style/AppTheme.TextViewWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="@string/user_name" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etUsername"
+                    style="@style/AppTheme.EditTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:autoText="false"
+                    android:gravity="right"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+                <ImageView
+                    android:id="@+id/clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:onClick="@{()->viewModel.onCallClearUsername()}"
+                    android:src="@drawable/clear" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/password_text"
+                style="@style/AppTheme.TextViewWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="@string/password_user" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    style="@style/AppTheme.EditTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890"
+                    android:gravity="right"
+                    android:imeOptions="actionGo"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+                <ImageView
+                    android:id="@+id/show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:onClick="@{()->viewModel.onCallShowPassword()}"
+                    android:src="@drawable/hidden" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnLogin"
+                style="@style/AppTheme.ButtonAccentColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:imeOptions="actionDone"
+                android:onClick="@{() -> viewModel.onLoginClick()}"
+                android:text="@string/login" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/register_text"
+            style="@style/AppTheme.TextViewTitleWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout"
+            android:layout_centerHorizontal="true"
+            android:onClick="@{()->viewModel.onCallRegister()}"
+            android:text="@string/register_user" />
+
+        <TextView
+            android:id="@+id/forget_password_text"
+            style="@style/AppTheme.TextViewWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/register_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:onClick="@{()->viewModel.onCallForgetPassword()}"
+            android:text="@string/forget_password" />
+    </RelativeLayout>
+</layout>

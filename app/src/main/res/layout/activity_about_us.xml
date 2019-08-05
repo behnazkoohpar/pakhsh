@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:Context="com.koohpar.dstrbt.ui.about.AboutUsActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.koohpar.dstrbt.ui.about.AboutUsViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextViewTitleWhite"
+                android:layout_centerInParent="true"
+                android:text="ارتباط با ما"
+                android:textColor="@color/black_effective"
+                android:textSize="@dimen/font_size_large"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    style="@style/AppTheme.TextViewTitleWhite"
+                    android:layout_marginTop="20dp"
+                    android:text="سامانه پخش بهشرق تحت برند ساتک"
+                    android:textColor="@color/black_effective"
+                    android:textSize="@dimen/font_size_large"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    style="@style/AppTheme.TextViewTitleWhite"
+                    android:layout_marginTop="20dp"
+                    android:text="(سامانه الکترونیکی تامین کالا)"
+                    android:textColor="@color/black_effective"
+                    android:textSize="@dimen/font_size_large"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="@{()->viewModel.callToMe()}">
+
+                <ImageView
+                    android:id="@+id/imgtel"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:tint="@color/gray_800"
+                    android:src="@drawable/tel" />
+
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_toLeftOf="@+id/imgtel"
+                    style="@style/AppTheme.TextViewTitleWhite"
+                    android:text="02177335397"
+                    android:textColor="@color/black_effective"
+                    android:textSize="@dimen/font_size_large"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="@{()->viewModel.callToMe2()}">
+
+                <ImageView
+                    android:id="@+id/imgtel2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:tint="@color/gray_800"
+                    android:src="@drawable/tel" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_toLeftOf="@+id/imgtel2"
+                    android:text="02177335399"
+                    style="@style/AppTheme.TextViewTitleWhite"
+                    android:textColor="@color/black_effective"
+                    android:textSize="@dimen/font_size_large"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="@{()->viewModel.showSite()}">
+
+                <ImageView
+                    android:id="@+id/imgsite"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:tint="@color/gray_800"
+                    android:src="@drawable/internet" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_toLeftOf="@+id/imgsite"
+                    android:text="www.satakco.com"
+                    style="@style/AppTheme.TextViewTitleWhite"
+                    android:textColor="@color/black_effective"
+                    android:textSize="@dimen/font_size_large"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "59267525858",
+    "firebase_url": "https://pakhsh-c6522.firebaseio.com",
+    "project_id": "pakhsh-c6522",
+    "storage_bucket": "pakhsh-c6522.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59267525858:android:72ff276b356cc3a5",
+        "android_client_info": {
+          "package_name": "com.koohpar.dstrbt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59267525858-d9s39iln2o0mg036ljkd80undtgdvqi4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.koohpar.dstrbt",
+            "certificate_hash": "1e423a3fc00e243520cac96699c1c039fe6b796c"
+          }
+        },
+        {
+          "client_id": "59267525858-h7ln89iibhmbjqj522ch51qna1n7o4f6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANTHnTukJvqwjJhjtzOGBTDHKibZNFs7U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59267525858-h7ln89iibhmbjqj522ch51qna1n7o4f6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

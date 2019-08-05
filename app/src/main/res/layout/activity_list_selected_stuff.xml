@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimary"
+    tools:Context="com.koohpar.dstrbt.ui.listSelectedStuff.ListSelectedStuffActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.koohpar.dstrbt.ui.listSelectedStuff.ListSelectedStuffViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent">
+
+            <TextView
+                style="@style/AppTheme.font"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/padding_large"
+                android:text="@string/categorylist"
+                android:textColor="@color/white" />
+
+            <TextView
+                style="@style/AppTheme.ButtonRed"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:onClick="@{() -> viewModel.onDeleteClick()}"
+                android:text="انصراف از درخواست" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/category_stuff_list_selected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/sumFactor"
+            android:layout_below="@+id/title"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/margin_mini_small"
+            android:background="@color/colorPrimary"
+            android:scrollbars="vertical">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <RelativeLayout
+            android:id="@+id/sumFactor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/txt"
+                style="@style/AppTheme.font"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@color/gray_500"
+                android:padding="@dimen/padding_mini_small"
+                android:text="@string/sum"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+            <RelativeLayout
+                android:id="@+id/text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt"
+                android:background="@color/white">
+
+                <TextView
+                    style="@style/AppTheme.font"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/padding_mini_small"
+                    android:text="@string/sum"
+                    android:textColor="@color/black_effective" />
+
+                <TextView
+                    android:id="@+id/sum"
+                    style="@style/AppTheme.font"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_toRightOf="@+id/rial"
+                    android:padding="@dimen/padding_mini_small"
+                    android:textColor="@color/black_effective" />
+
+                <TextView
+                    android:id="@+id/rial"
+                    style="@style/AppTheme.font"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:padding="@dimen/padding_mini_small"
+                    android:text="@string/rial"
+                    android:textColor="@color/black_effective" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnLogin"
+                style="@style/AppTheme.ButtonAccentColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text2"
+                android:layout_margin="@dimen/margin_small"
+                android:imeOptions="actionDone"
+                android:onClick="@{() -> viewModel.onSetClick()}"
+                android:text="@string/set_order" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/shopping"
+            android:icon="@drawable/add_shopping"
+            android:title="@string/shopping" />
+        <item
+            android:id="@+id/report"
+            android:icon="@drawable/report"
+            android:title="@string/report" />
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/profile"
+            android:title="@string/profile" />
+        <item
+            android:id="@+id/category"
+            android:icon="@drawable/category"
+            android:title="@string/category" />
+        <item
+            android:id="@+id/brand"
+            android:icon="@drawable/brand"
+            android:title="@string/brand" />
+        <item
+            android:id="@+id/aboutme"
+            android:icon="@drawable/aboutme"
+            android:title="@string/aboutme" />
+        <item
+            android:id="@+id/exit"
+            android:icon="@drawable/exit"
+            android:title="@string/exit" />
+    </group>
+</menu>
