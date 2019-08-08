@@ -3,8 +3,8 @@ package com.koohpar.dstrbt.ui.main;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +12,6 @@ import android.widget.ImageView;
 
 import com.koohpar.dstrbt.R;
 import com.koohpar.dstrbt.data.model.api.BannerResponse;
-
-import org.json.JSONException;
-import org.json.simple.JSONArray;
 
 import java.util.List;
 

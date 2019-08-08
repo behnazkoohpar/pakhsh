@@ -3,7 +3,7 @@ package com.koohpar.dstrbt.ui.categoryStuff;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.koohpar.dstrbt.R;
 import com.koohpar.dstrbt.data.model.api.CategoryStuffResponse;
 import com.koohpar.dstrbt.data.model.api.database.StuffSelected;
-import com.koohpar.dstrbt.ui.main.MainActivity;
 
 import java.text.NumberFormat;
 import java.util.List;

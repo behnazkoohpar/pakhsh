@@ -19,20 +19,18 @@ package com.koohpar.dstrbt.ui.base;
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.koohpar.dstrbt.api.ICallApi;
-import com.koohpar.dstrbt.ui.splash.SplashActivity;
 import com.koohpar.dstrbt.utils.CommonUtils;
 import com.koohpar.dstrbt.utils.NetworkUtils;
 

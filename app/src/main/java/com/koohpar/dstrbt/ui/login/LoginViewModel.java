@@ -2,7 +2,7 @@ package com.koohpar.dstrbt.ui.login;
 
 import android.app.Activity;
 import android.content.Context;
-import android.databinding.ObservableField;
+import androidx.databinding.ObservableField;
 
 import com.koohpar.dstrbt.R;
 import com.koohpar.dstrbt.api.BaseCallback;
@@ -10,7 +10,6 @@ import com.koohpar.dstrbt.api.ICallApi;
 import com.koohpar.dstrbt.data.DataManager;
 import com.koohpar.dstrbt.data.model.api.ProfileUserResponse;
 import com.koohpar.dstrbt.data.model.api.base.Data;
-import com.koohpar.dstrbt.data.model.api.base.DataConfigObject;
 import com.koohpar.dstrbt.ui.base.BaseViewModel;
 import com.koohpar.dstrbt.utils.AppConstants;
 import com.koohpar.dstrbt.utils.CommonUtils;

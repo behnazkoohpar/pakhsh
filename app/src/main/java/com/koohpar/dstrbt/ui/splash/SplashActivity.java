@@ -1,7 +1,6 @@
 package com.koohpar.dstrbt.ui.splash;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -13,7 +12,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.FileProvider;
+import androidx.core.content.FileProvider;
 import android.util.Log;
 
 import com.koohpar.dstrbt.BR;

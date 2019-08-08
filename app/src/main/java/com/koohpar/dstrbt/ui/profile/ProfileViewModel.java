@@ -1,8 +1,8 @@
 package com.koohpar.dstrbt.ui.profile;
 
 import android.app.Activity;
-import android.databinding.ObservableBoolean;
-import android.databinding.ObservableField;
+import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableField;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.koohpar.dstrbt.R;

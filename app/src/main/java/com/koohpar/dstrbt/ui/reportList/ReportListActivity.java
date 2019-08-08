@@ -3,9 +3,10 @@ package com.koohpar.dstrbt.ui.reportList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 
 import com.koohpar.dstrbt.BR;
@@ -15,8 +16,6 @@ import com.koohpar.dstrbt.databinding.ActivityReportListBinding;
 import com.koohpar.dstrbt.ui.base.BaseActivity;
 import com.koohpar.dstrbt.ui.detailReportList.DetailReportListActivity;
 import com.koohpar.dstrbt.ui.main.MainActivity;
-import com.koohpar.dstrbt.ui.profile.ProfileActivity;
-import com.koohpar.dstrbt.ui.profile.ProfileViewModel;
 import com.koohpar.dstrbt.utils.AppConstants;
 import com.koohpar.dstrbt.utils.CommonUtils;
 

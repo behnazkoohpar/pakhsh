@@ -3,8 +3,8 @@ package com.koohpar.dstrbt.ui.listSelectedStuff;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -13,7 +13,6 @@ import com.koohpar.dstrbt.R;
 import com.koohpar.dstrbt.data.model.api.database.StuffSelected;
 import com.koohpar.dstrbt.databinding.ActivityListSelectedStuffBinding;
 import com.koohpar.dstrbt.ui.base.BaseActivity;
-import com.koohpar.dstrbt.ui.main.MainActivity;
 import com.koohpar.dstrbt.ui.profile.ProfileActivity;
 import com.koohpar.dstrbt.utils.AppConstants;
 import com.koohpar.dstrbt.utils.CommonUtils;

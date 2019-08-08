@@ -1,7 +1,7 @@
 package com.koohpar.dstrbt;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 /**
  * Created by RV on 19/07/17.

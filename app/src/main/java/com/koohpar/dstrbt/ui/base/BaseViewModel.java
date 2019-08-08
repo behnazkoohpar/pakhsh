@@ -17,8 +17,8 @@
 package com.koohpar.dstrbt.ui.base;
 
 
-import android.arch.lifecycle.ViewModel;
-import android.databinding.ObservableBoolean;
+import androidx.lifecycle.ViewModel;
+import androidx.databinding.ObservableBoolean;
 
 import com.koohpar.dstrbt.api.IAPIResponse;
 import com.koohpar.dstrbt.data.DataManager;

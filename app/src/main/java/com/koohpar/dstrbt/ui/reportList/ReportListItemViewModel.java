@@ -1,10 +1,9 @@
 package com.koohpar.dstrbt.ui.reportList;
 
-import android.databinding.ObservableField;
+import androidx.databinding.ObservableField;
 
 import com.koohpar.dstrbt.data.model.api.ReportListResponse;
 import com.koohpar.dstrbt.utils.fdate.DateUtil;
-import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import java.text.NumberFormat;
 

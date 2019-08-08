@@ -1,7 +1,7 @@
 package com.koohpar.dstrbt.ui.detailReportList;
 
-import android.databinding.ObservableBoolean;
-import android.databinding.ObservableField;
+import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableField;
 
 import com.koohpar.dstrbt.data.model.api.DetailReportListResponse;
 

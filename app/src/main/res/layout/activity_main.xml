@@ -14,7 +14,7 @@
             type="com.koohpar.dstrbt.ui.main.MainViewModel" />
     </data>
 
-    <android.support.v4.widget.DrawerLayout
+    <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/dl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -111,14 +111,14 @@
                     android:singleLine="true" />
             </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/advertise_list"
                 android:layout_width="wrap_content"
                 android:layout_height="120dp"
                 android:background="@color/colorPrimary"
                 android:layout_gravity="right">
 
-            </android.support.v7.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -229,18 +229,18 @@
                 android:layout_marginRight="@dimen/margin_small"
                 android:text="@string/suggestion" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/suggestion_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:background="@color/colorPrimary">
 
-            </android.support.v7.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
 
-        <android.support.design.widget.NavigationView
+        <com.google.android.material.navigation.NavigationView
             android:id="@+id/nv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -253,6 +253,6 @@
             app:headerLayout="@layout/header"
             app:menu="@menu/menu" />
 
-    </android.support.v4.widget.DrawerLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </layout>

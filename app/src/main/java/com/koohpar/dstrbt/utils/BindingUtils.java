@@ -17,7 +17,7 @@
 package com.koohpar.dstrbt.utils;
 
 import android.content.Context;
-import android.databinding.BindingAdapter;
+import androidx.databinding.BindingAdapter;
 import android.widget.ImageView;
 
 /**
