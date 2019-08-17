@@ -47,6 +47,7 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':persianmaterialdatetimepicker')
+    implementation project(':ScrollingPagerIndicator')
     // android support libraries
     //noinspection GradleCompatible
     implementation 'androidx.appcompat:appcompat:1.0.0'
