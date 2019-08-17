@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import com.koohpar.dstrbt.BR;
 import com.koohpar.dstrbt.R;
 import com.koohpar.dstrbt.data.DataManager;
+import com.koohpar.dstrbt.data.model.api.MarketerListResponse;
 import com.koohpar.dstrbt.data.model.api.ProfileUserResponse;
 import com.koohpar.dstrbt.databinding.ActivityRegisterBinding;
 import com.koohpar.dstrbt.ui.base.BaseActivity;
@@ -35,6 +36,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
     ActivityRegisterBinding mActivityRegisterBinding;
     private ImageView show;
     private EditText password, telNumber, name, family;
+    private String idMarketer;
 
     @Override
     public RegisterViewModel getViewModel() {
@@ -121,6 +123,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
                 map.put(REQUEST_KEY_MOBILE_NUMBER, telNumber.getText().toString());
                 map.put(REQUEST_KEY_NAME, name.getText().toString());
                 map.put(REQUEST_KEY_FAMILY, family.getText().toString());
+                map.put(REQUEST_KEY_CODE, idMarketer);
 
                 if (LOGTRUE)
                     Log.d("mPARAMS Register :::::::: ", map.toString());
@@ -140,6 +143,24 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
             if (LOGTRUE)
                 Log.d("mPARAMS ProfileUser :::::::: ", map.toString());
             mRegisterViewModel.ProfileUser(iCallApi, RegisterActivity.this, map);
+        } catch (Exception e) {
+            CommonUtils.showSingleButtonAlert(RegisterActivity.this, getString(R.string.text_attention), getString(R.string.data_incorrect), null, null);
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void callCheckCode() {
+        try {
+            if (mActivityRegisterBinding.code.getText().toString().isEmpty()) {
+                CommonUtils.showSingleButtonAlert(RegisterActivity.this, getString(R.string.text_attention), getString(R.string.code_is_null), null, null);
+                return;
+            }
+            HashMap<String, String> map = new HashMap<>();
+            map.put(REQUEST_KEY_CODE, mActivityRegisterBinding.code.getText().toString());
+            if (LOGTRUE)
+                Log.d("mPARAMS callCheckCode :::::::: ", map.toString());
+            mRegisterViewModel.checkCode(iCallApi, RegisterActivity.this, map);
         } catch (Exception e) {
             CommonUtils.showSingleButtonAlert(RegisterActivity.this, getString(R.string.text_attention), getString(R.string.data_incorrect), null, null);
             e.printStackTrace();
@@ -189,6 +210,16 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
                 profileUserResponse.getLastName(),
                 profileUserResponse.getImage(),
                 profileUserResponse.getUserID());
+    }
+
+    @Override
+    public void setMarketerListResponse(MarketerListResponse marketerListResponse) {
+        idMarketer = marketerListResponse.getID();
+        CommonUtils.showSingleButtonAlert(RegisterActivity.this, getString(R.string.text_attention),
+                "آقای "+marketerListResponse.getFirstName()+" "+marketerListResponse.getLastName()+" . تلفن همراه:  "+marketerListResponse.getPhoneNumber(),
+                null, null);
+        mActivityRegisterBinding.code.setEnabled(false);
+        mActivityRegisterBinding.btnCheckCode.setEnabled(false);
     }
 
     @Override

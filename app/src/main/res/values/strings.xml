@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">بهشرق</string>
+    <string name="app_name">خورجین</string>
     <string name="please_wait">لطفا صبر کنید</string>
     <string name="login">ورود</string>
     <string name="login_title">ورود به حساب کاربری</string>
@@ -126,4 +126,8 @@
     <string name="fee">قیمت مصرف کننده(فی)</string>
     <string name="txt_dont_recieve_code">کد فعالسازی را دریافت نکردم</string>
     <string name="txt_call_center">تماس با پشتیبانی</string>
+    <string name="checkCode">تایید صحت کد</string>
+    <string name="code">کد معرف</string>
+    <string name="code_is_null">کد را وارد کنید</string>
+    <string name="notifyInventory">محصولات در انتظار</string>
 </resources>

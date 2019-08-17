@@ -24,6 +24,8 @@
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.notifyInventory.ListNotifyInventoryActivity"></activity>
+
         <uses-library android:name="com.google.android.maps" />
 
         <provider
@@ -34,9 +36,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
-        </provider>
-
-        <!-- <meta-data -->
+        </provider> <!-- <meta-data -->
         <!-- android:name="com.google.android.geo.API_KEY" -->
         <!-- android:value="@string/google_api_key" /> -->
         <meta-data
@@ -64,18 +64,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service
-            android:name=".firebase.MyFirebaseInstanceIDService">
+
+        <service android:name=".firebase.MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service
-            android:name=".firebase.MyFirebaseMessagingService">
+        <service android:name=".firebase.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <activity
             android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait" />
@@ -110,7 +110,7 @@
         <activity android:name=".ui.about.AboutUsActivity" />
         <activity android:name=".ui.newPassword.NewPasswordActivity" />
         <activity android:name=".ui.reportList.ReportListActivity" />
-        <activity android:name=".ui.detailReportList.DetailReportListActivity"></activity>
+        <activity android:name=".ui.detailReportList.DetailReportListActivity" />
     </application>
 
 </manifest>

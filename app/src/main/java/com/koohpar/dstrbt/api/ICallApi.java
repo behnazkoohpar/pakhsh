@@ -8,6 +8,7 @@ import com.koohpar.dstrbt.data.model.api.CategoryResponse;
 import com.koohpar.dstrbt.data.model.api.CategoryStuffResponse;
 import com.koohpar.dstrbt.data.model.api.DetailReportListResponse;
 import com.koohpar.dstrbt.data.model.api.GetLastVersionResponse;
+import com.koohpar.dstrbt.data.model.api.MarketerListResponse;
 import com.koohpar.dstrbt.data.model.api.ProfileUserResponse;
 import com.koohpar.dstrbt.data.model.api.ReportListResponse;
 import com.koohpar.dstrbt.data.model.api.SpecialOfferResponse;
@@ -126,4 +127,15 @@ public interface ICallApi {
     @POST("/WS/edit_item_request")
     Call<Data> editItemRequest(@FieldMap HashMap<String, String> map);
 
+    @FormUrlEncoded
+    @POST("/WS/check_code_marketer")
+    Call<Data<MarketerListResponse>> checkCode(@FieldMap HashMap<String, String> map);
+
+    @FormUrlEncoded
+    @POST("/WS/set_notify_inventory_increase")
+    Call<Data> setnotif(@FieldMap HashMap<String, String> map);
+
+    @FormUrlEncoded
+    @POST("/WS/get_notify_inventory_list")
+    Call<Data<CategoryStuffResponse>> getNotifyInventory(HashMap<String, String> map);
 }

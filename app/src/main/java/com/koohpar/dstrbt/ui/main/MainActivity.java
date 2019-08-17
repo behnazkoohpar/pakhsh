@@ -41,11 +41,13 @@ import com.koohpar.dstrbt.ui.category.CategoryActivity;
 import com.koohpar.dstrbt.ui.categoryStuff.CategoryStuffActivity;
 import com.koohpar.dstrbt.ui.listSelectedStuff.ListSelectedStuffActivity;
 import com.koohpar.dstrbt.ui.login.LoginActivity;
+import com.koohpar.dstrbt.ui.notifyInventory.ListNotifyInventoryActivity;
 import com.koohpar.dstrbt.ui.profile.ProfileActivity;
 import com.koohpar.dstrbt.ui.reportList.ReportListActivity;
 import com.koohpar.dstrbt.utils.AppConstants;
 import com.koohpar.dstrbt.utils.CommonUtils;
 import com.koohpar.dstrbt.utils.CustomTypefaceSpan;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import org.json.JSONException;
 
@@ -216,6 +218,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if (id == R.id.notifyInventory) {
+            Intent intent = ListNotifyInventoryActivity.getStartIntent(this);
+            startActivity(intent);
+        }
         if (id == R.id.shopping) {
             Intent intent = ListSelectedStuffActivity.getStartIntent(this);
             startActivity(intent);
@@ -265,7 +271,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         startActivity(intent);
     }
 
-    @Override
     public void openCategoryList() {
         Intent intent = CategoryActivity.getStartIntent(this);
         startActivity(intent);
@@ -351,7 +356,28 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 }
                 mAdapter.notifyItemChanged(position);
             }
+
+            @Override
+            public void onNotifClick(int position) {
+                callSetNotif(specialOfferResponses.get(position));
+            }
         });
+    }
+
+    private void callSetNotif(SpecialOfferResponse specialOfferResponse) {
+        try {
+            PersianCalendar persianCalendar = new PersianCalendar();
+            HashMap<String, String> map = new HashMap<>();
+            map.put(REQUEST_KEY_STUFF_BRAND_ID, specialOfferResponse.getID());
+            map.put(REQUEST_KEY_USER_ID, mMainViewModel.getDataManager().getUserId());
+            map.put(REQUEST_KEY_CREATE_REQUEST, persianCalendar.getPersianYear()+"/"+persianCalendar.getPersianMonth()+"/"+persianCalendar.getPersianDay());
+            if (LOGTRUE)
+                Log.d("mPARAMS Category :::::::: ", map.toString());
+            mMainViewModel.setNotif(iCallApi, this, map);
+        } catch (Exception e) {
+            CommonUtils.showSingleButtonAlert(this, getString(R.string.text_attention), getString(R.string.data_incorrect), null, null);
+            e.printStackTrace();
+        }
     }
 
     private void removeItem(int position) {

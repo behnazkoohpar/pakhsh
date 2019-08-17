@@ -37,8 +37,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginRight="20dp"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -231,8 +231,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_mini_small"
-                    android:layout_marginRight="@dimen/margin_mini_small"
-                    android:layout_marginTop="@dimen/margin_small">
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginRight="@dimen/margin_mini_small">
 
                     <EditText
                         android:id="@+id/password"
@@ -260,6 +260,41 @@
                         android:onClick="@{()->viewModel.onCallShowPassword()}"
                         android:src="@drawable/hidden" />
 
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_mini_small"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginRight="@dimen/margin_mini_small">
+
+                    <EditText
+                        android:id="@+id/code"
+                        style="@style/AppTheme.EditTextWhiteRegister"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:hint="@string/code"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:maxLines="1"
+                        android:padding="@dimen/padding_large"
+                        android:singleLine="true"
+                        android:textAlignment="center" />
+
+                    <Button
+                        android:id="@+id/btnCheckCode"
+                        style="@style/AppTheme.ButtonAccentColor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/margin_normal"
+                        android:layout_toLeftOf="@+id/code"
+                        android:onClick="@{()->viewModel.onCallCheckCode()}"
+                        android:text="@string/checkCode" />
                 </RelativeLayout>
 
                 <RelativeLayout

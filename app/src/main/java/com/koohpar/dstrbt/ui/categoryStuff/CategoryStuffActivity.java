@@ -16,6 +16,7 @@ import com.koohpar.dstrbt.databinding.ActivityCategoryStuffBinding;
 import com.koohpar.dstrbt.ui.base.BaseActivity;
 import com.koohpar.dstrbt.utils.AppConstants;
 import com.koohpar.dstrbt.utils.CommonUtils;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import org.json.JSONException;
 
@@ -120,7 +121,7 @@ public class CategoryStuffActivity extends BaseActivity<ActivityCategoryStuffBin
         buildRecycleView(categoryStuffResponses);
     }
 
-    private void buildRecycleView(List<CategoryStuffResponse> categoryStuffResponses) {
+    private void buildRecycleView(final List<CategoryStuffResponse> categoryStuffResponses) {
 
         recyclerViewCategoryStuff = (RecyclerView) findViewById(R.id.category_stuff_list);
         layoutManagerCategoryStuff = new LinearLayoutManager(this);
@@ -143,7 +144,28 @@ public class CategoryStuffActivity extends BaseActivity<ActivityCategoryStuffBin
                 }
                 mAdapter.notifyItemChanged(position);
             }
+
+            @Override
+            public void onNotifClick(int position) {
+                callSetNotif(categoryStuffResponses.get(position));
+            }
         });
+    }
+
+    private void callSetNotif(CategoryStuffResponse categoryStuffResponse) {
+        try {
+            PersianCalendar persianCalendar = new PersianCalendar();
+            HashMap<String, String> map = new HashMap<>();
+            map.put(REQUEST_KEY_STUFF_BRAND_ID, categoryStuffResponse.getID());
+            map.put(REQUEST_KEY_USER_ID, mCategoryStuffViewModel.getDataManager().getUserId());
+            map.put(REQUEST_KEY_CREATE_REQUEST, persianCalendar.getPersianYear()+"/"+persianCalendar.getPersianMonth()+"/"+persianCalendar.getPersianDay());
+            if (LOGTRUE)
+                Log.d("mPARAMS Category :::::::: ", map.toString());
+            mCategoryStuffViewModel.setNotif(iCallApi, this, map);
+        } catch (Exception e) {
+            CommonUtils.showSingleButtonAlert(this, getString(R.string.text_attention), getString(R.string.data_incorrect), null, null);
+            e.printStackTrace();
+        }
     }
 
     private void removeItem(int position) {

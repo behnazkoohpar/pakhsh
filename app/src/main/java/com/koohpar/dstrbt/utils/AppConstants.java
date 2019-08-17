@@ -5,8 +5,8 @@ package com.koohpar.dstrbt.utils;
  */
 public interface AppConstants {
 
-//    String BASE_URL = "http://192.168.43.39:3000";
-    String BASE_URL = "http://185.187.51.209:3000";
+    String BASE_URL = "http://192.168.1.172:3000";
+//    String BASE_URL = "http://185.187.51.209:3000";
 //    String BASE_URL = "http://185.112.34.184:3000";
     String PREF_NAME = "distribution_pref";
     String TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss";
@@ -50,6 +50,9 @@ public interface AppConstants {
     String REQUEST_KEY_PRICE = "price";
     String REQUEST_KEY_OFFER = "offer";
     String REQUEST_KEY_ITEM_SUM_PRICE = "item_sum_price";
+    String REQUEST_KEY_CODE = "code";
+    String REQUEST_KEY_STUFF_BRAND_ID = "stuff_brand_id";
+    String REQUEST_KEY_CREATE_REQUEST = "create_request";
 
     // Headers
     String HEADER_SECURITY_KEY = "security_key";
@@ -84,6 +87,9 @@ public interface AppConstants {
     int API_CALL_DELETE_DETAIL_REQUEST = 1023;
     int API_CALL_DELETE_ITEM_DETAIL_REQUEST = 1024;
     int API_CALL_EDIT_ITEM_DETAIL_REQUEST = 1025;
+    int API_CALL_CHECK_CODE = 1026;
+    int API_CALL_SET_NOTIF = 1027;
+    int API_CALL_GET_NOTIFY_INVENTORY_LIST = 1028;
 
     String REQ_KEY_FACTOR_ID = "factor_id";
 

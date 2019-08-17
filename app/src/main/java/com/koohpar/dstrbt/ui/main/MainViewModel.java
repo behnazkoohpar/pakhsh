@@ -39,9 +39,7 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements AppCo
         getNavigator().callSearch();
     }
 
-    public void onCallCategory() {
-        getNavigator().openCategoryList();
-    }
+
 
     public void getBanerList(ICallApi iCallApi, MainActivity context, HashMap<String, String> map) {
         try {
@@ -65,6 +63,18 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements AppCo
         }
     }
 
+    public void setNotif(ICallApi iCallApi, MainActivity context, HashMap<String, String> map) {
+        try {
+            BaseCallback baseCallback = new BaseCallback(context, false, iCallApi, getDataManager(), API_CALL_SET_NOTIF, this);
+            iCallApi.setnotif(map).enqueue(baseCallback);
+            setIsLoading(true);
+        } catch (Exception e) {
+            CommonUtils.showSingleButtonAlert(mActivity, mActivity.getString(R.string.text_attention), mActivity.getString(R.string.not_can_call), null, null);
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public void onResponseSuccess(Object mObject, int requestCode) {
         try {
@@ -81,6 +91,9 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements AppCo
                     case API_CALL_ALL_SPECIAL_OFFER:
                         List<SpecialOfferResponse> specialOfferResponses = data.getData();
                         getNavigator().setSpecialOffer(specialOfferResponses);
+                        break;
+                    case API_CALL_SET_NOTIF:
+                        CommonUtils.showSingleButtonAlert(mActivity, mActivity.getString(R.string.text_attention), data.getSettings().getMessage(), null, null);
                         break;
                 }
             }
@@ -101,4 +114,6 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements AppCo
         setIsLoading(false);
         CommonUtils.showSingleButtonAlert(mActivity, mActivity.getString(R.string.text_attention), mActivity.getString(R.string.authentication_failed), mActivity.getString(R.string.btn_ok), null);
     }
+
+
 }

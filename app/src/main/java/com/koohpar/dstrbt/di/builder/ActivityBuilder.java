@@ -22,6 +22,9 @@ import com.koohpar.dstrbt.ui.main.MainActivity;
 import com.koohpar.dstrbt.ui.main.MainActivityModule;
 import com.koohpar.dstrbt.ui.newPassword.NewPasswordActivity;
 import com.koohpar.dstrbt.ui.newPassword.NewPasswordActivityModule;
+import com.koohpar.dstrbt.ui.notifyInventory.ListNotifyInventoryActivity;
+import com.koohpar.dstrbt.ui.notifyInventory.ListNotifyInventoryActivityModule;
+import com.koohpar.dstrbt.ui.notifyInventory.ListNotifyInventoryViewModel;
 import com.koohpar.dstrbt.ui.profile.ProfileActivity;
 import com.koohpar.dstrbt.ui.profile.ProfileActivityModule;
 import com.koohpar.dstrbt.ui.register.RegisterActivity;
@@ -86,4 +89,7 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = DetailReportListActivityModule.class)
     abstract DetailReportListActivity bindDetailReportListActivity();
+
+    @ContributesAndroidInjector(modules = ListNotifyInventoryActivityModule.class)
+    abstract ListNotifyInventoryActivity bindListNotifyInventoryActivity();
 }

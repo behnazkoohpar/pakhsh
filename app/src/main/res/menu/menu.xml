@@ -14,6 +14,10 @@
             android:icon="@drawable/profile"
             android:title="@string/profile" />
         <item
+            android:id="@+id/notifyInventory"
+            android:icon="@drawable/ic_battery_charging_60_black_24dp"
+            android:title="@string/notifyInventory" />
+        <item
             android:id="@+id/category"
             android:icon="@drawable/category"
             android:title="@string/category" />

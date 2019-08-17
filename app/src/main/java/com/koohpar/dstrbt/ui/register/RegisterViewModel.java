@@ -6,6 +6,7 @@ import com.koohpar.dstrbt.R;
 import com.koohpar.dstrbt.api.BaseCallback;
 import com.koohpar.dstrbt.api.ICallApi;
 import com.koohpar.dstrbt.data.DataManager;
+import com.koohpar.dstrbt.data.model.api.MarketerListResponse;
 import com.koohpar.dstrbt.data.model.api.ProfileUserResponse;
 import com.koohpar.dstrbt.data.model.api.base.Data;
 import com.koohpar.dstrbt.ui.base.BaseViewModel;
@@ -51,11 +52,24 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> implemen
     public void onCallRegister() {
         getNavigator().callRegister();
     }
+    public void onCallCheckCode() {
+        getNavigator().callCheckCode();
+    }
 
     public void Register(ICallApi iCallApi, RegisterActivity context, HashMap<String, String> map) {
         try {
             BaseCallback baseCallback = new BaseCallback(context, true, iCallApi, getDataManager(), API_CALL_REGISTER, this);
             iCallApi.register(map).enqueue(baseCallback);
+            setIsLoading(true);
+        } catch (Exception e) {
+            CommonUtils.showSingleButtonAlert(mActivity, mActivity.getString(R.string.text_attention), mActivity.getString(R.string.not_can_call), null, null);
+            e.printStackTrace();
+        }
+    }
+    public void checkCode(ICallApi iCallApi, RegisterActivity context, HashMap<String, String> map) {
+        try {
+            BaseCallback baseCallback = new BaseCallback(context, true, iCallApi, getDataManager(), API_CALL_CHECK_CODE, this);
+            iCallApi.checkCode(map).enqueue(baseCallback);
             setIsLoading(true);
         } catch (Exception e) {
             CommonUtils.showSingleButtonAlert(mActivity, mActivity.getString(R.string.text_attention), mActivity.getString(R.string.not_can_call), null, null);
@@ -104,6 +118,11 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> implemen
                                 getNavigator().setProfileParameter(profileUserResponse);
                                 getNavigator().openMainActivity();
                                 break;
+
+                            case API_CALL_CHECK_CODE:
+                                MarketerListResponse marketerListResponse = (MarketerListResponse) data.getData().get(0);
+                                getNavigator().setMarketerListResponse(marketerListResponse);
+                                break;
                         }
                     }
                 } else
@@ -127,5 +146,6 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> implemen
         setIsLoading(false);
         CommonUtils.showSingleButtonAlert(mActivity, mActivity.getString(R.string.text_attention), mActivity.getString(R.string.authentication_failed), mActivity.getString(R.string.btn_ok), null);
     }
+
 
 }

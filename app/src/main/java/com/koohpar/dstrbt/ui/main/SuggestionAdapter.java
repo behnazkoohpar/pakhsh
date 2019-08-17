@@ -33,6 +33,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Vi
 
     public interface OnItemClickListener {
         void onIncreaseClick(int position);
+        void onNotifClick(int position);
     }
 
     public void setOnitemclickListener(OnItemClickListener onitemclickListener) {
@@ -66,6 +67,17 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Vi
                     }
                 }
             });
+            callMe.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onNotifClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -88,14 +100,14 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Vi
         if (Integer.parseInt(this.stList.get(position).getLastStock()) < Integer.parseInt(this.stList.get(position).getMinimumStuck())) {
             viewHolder.callMe.setVisibility(View.VISIBLE);
             viewHolder.shopping.setVisibility(View.GONE);
-        }
+        }else{
 
         if (StuffSelected.findByGUID(this.stList.get(position).getID()) == null)
             viewHolder.shopping.setVisibility(this.stList.get(position).getVisibility());
         else {
             viewHolder.shopping.setVisibility(View.GONE);
             viewHolder.callMe.setVisibility(View.GONE);
-        }
+        }}
     }
 
     public int getItemCount() {

@@ -1,5 +1,6 @@
 package com.koohpar.dstrbt.ui.register;
 
+import com.koohpar.dstrbt.data.model.api.MarketerListResponse;
 import com.koohpar.dstrbt.data.model.api.ProfileUserResponse;
 
 /**
@@ -16,4 +17,8 @@ public interface RegisterNavigator {
     void clearName();
     void setProfileParameter(ProfileUserResponse profileUserResponse);
     void callProfileUser();
+
+    void callCheckCode();
+
+    void setMarketerListResponse(MarketerListResponse marketerListResponse);
 }

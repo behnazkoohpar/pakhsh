@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:src="@drawable/sms"
             android:layout_marginTop="@dimen/margin_large"
             android:layout_centerHorizontal="true"/>

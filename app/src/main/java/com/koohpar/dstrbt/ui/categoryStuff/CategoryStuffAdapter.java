@@ -33,6 +33,7 @@ public class CategoryStuffAdapter extends RecyclerView.Adapter<CategoryStuffAdap
 
     public interface OnItemClickListener {
         void onIncreaseClick(int position);
+        void onNotifClick(int position);
     }
 
     public void setOnitemclickListener(CategoryStuffAdapter.OnItemClickListener onitemclickListener) {
@@ -65,6 +66,17 @@ public class CategoryStuffAdapter extends RecyclerView.Adapter<CategoryStuffAdap
                             shopping.setVisibility(View.GONE);
                             listener.onIncreaseClick(position);
 
+                        }
+                    }
+                }
+            });
+            callMe.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onNotifClick(position);
                         }
                     }
                 }
