@@ -1,7 +1,5 @@
 package com.koohpar.dstrbt.api;
 
-import android.app.DownloadManager;
-
 import com.koohpar.dstrbt.data.model.api.BannerResponse;
 import com.koohpar.dstrbt.data.model.api.BrandResponse;
 import com.koohpar.dstrbt.data.model.api.CategoryResponse;
@@ -80,6 +78,10 @@ public interface ICallApi {
     Call<Data<SpecialOfferResponse>> getAllSpecialOffer(@FieldMap HashMap<String, String> map);
 
     @FormUrlEncoded
+    @POST("/WS/get_all_special_offer_image")
+    Call<Data<SpecialOfferResponse>>  getAllSpecialOfferImage(@FieldMap HashMap<String, String> map);
+
+    @FormUrlEncoded
     @POST("/WS/get_stuff_list_from_category")
     Call<Data<CategoryStuffResponse>> getAllCategoryStuff(@FieldMap HashMap<String, String> map);
 
@@ -137,5 +139,7 @@ public interface ICallApi {
 
     @FormUrlEncoded
     @POST("/WS/get_notify_inventory_list")
-    Call<Data<CategoryStuffResponse>> getNotifyInventory(HashMap<String, String> map);
+    Call<Data<CategoryStuffResponse>> getNotifyInventory(@FieldMap HashMap<String, String> map);
+
+
 }

@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
+
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -47,6 +48,7 @@ import com.koohpar.dstrbt.ui.reportList.ReportListActivity;
 import com.koohpar.dstrbt.utils.AppConstants;
 import com.koohpar.dstrbt.utils.CommonUtils;
 import com.koohpar.dstrbt.utils.CustomTypefaceSpan;
+import com.koohpar.dstrbt.utils.EndlessRecyclerViewScrollListener;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import org.json.JSONException;
@@ -59,6 +61,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.koohpar.dstrbt.ui.splash.SplashActivity.banerList;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements MainNavigator, AppConstants, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -76,14 +80,20 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     private ImageView menuItem, logoItem, shoppingItem;
     private RecyclerView recyclerView, recyclerViewSuggestion;
     private LinearLayoutManager layoutManager, layoutManagerSuggestion;
-    List<BannerResponse> banerList = new ArrayList<BannerResponse>();
     private ArrayList<SpecialOfferResponse> suggestionList = new ArrayList<SpecialOfferResponse>();
     private SuggestionAdapter mAdapter;
     private EditText search;
     private int i;
     private ImageView image1, image2, image3, image4, image5;
     private TextView numberShopping;
-    private List<SpecialOfferResponse> specialOfferList;
+    private List<SpecialOfferResponse> specialOfferList = new ArrayList<>();
+    private EndlessRecyclerViewScrollListener scrollListenerSuggestion;
+
+    private int firstVisiblePositionSuggestion;
+    private int findFirstCompletelyVisibleItemPositionSuggestion;
+    private int findLastVisibleItemPositionSuggestion;
+    private int findLastCompletelyVisibleItemPositionSuggestion;
+    private int pageNumSuggestion = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +103,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         mMainViewModel.setActivity(MainActivity.this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         initView();
+        setBanner();
         setUpNavDrawer();
         getListShopping();
+        getAllSpecialOffer(pageNumSuggestion,10);
     }
 
     private void getListShopping() {
@@ -112,22 +124,17 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         try {
             PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
             versionName = pInfo.versionName;
+
+            menuItem = (ImageView) findViewById(R.id.menu);
+            search = (EditText) findViewById(R.id.search);
+            numberShopping = (TextView) findViewById(R.id.numberShopping);
+            shoppingItem = (ImageView) findViewById(R.id.shopping);
+            menuItem.setOnClickListener(this);
+            shoppingItem.setOnClickListener(this);
+            search.setOnClickListener(this);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-
-        recyclerView = (RecyclerView) findViewById(R.id.advertise_list);
-        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-
-        menuItem = (ImageView) findViewById(R.id.menu);
-        logoItem = (ImageView) findViewById(R.id.logo);
-        search = (EditText) findViewById(R.id.search);
-        numberShopping = (TextView) findViewById(R.id.numberShopping);
-        shoppingItem = (ImageView) findViewById(R.id.shopping);
-        menuItem.setOnClickListener(this);
-        shoppingItem.setOnClickListener(this);
-        search.setOnClickListener(this);
     }
 
     @Override
@@ -286,23 +293,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         startActivity(intent);
     }
 
-    private void getAllBanerList() {
+    private void getAllSpecialOffer(int offset, int next) {
         try {
             HashMap<String, String> map = new HashMap<>();
+            map.put(REQUEST_KEY_OFFSER, String.valueOf(offset));
+            map.put(REQUEST_KEY_NEXT, String.valueOf(next));
             if (LOGTRUE)
-                Log.d("mPARAMS BanerList :::::::: ", map.toString());
-            mMainViewModel.getBanerList(iCallApi, this, map);
-        } catch (Exception e) {
-            CommonUtils.showSingleButtonAlert(this, getString(R.string.text_attention), getString(R.string.data_incorrect), null, null);
-            e.printStackTrace();
-        }
-    }
-
-    private void getAllSpecialOffer() {
-        try {
-            HashMap<String, String> map = new HashMap<>();
-            if (LOGTRUE)
-                Log.d("mPARAMS SpecialOffer :::::::: ", map.toString());
+                Log.d("mPARAMS :::::::: ", map.toString());
             mMainViewModel.getAllSpecialOffer(iCallApi, this, map);
         } catch (Exception e) {
             CommonUtils.showSingleButtonAlert(this, getString(R.string.text_attention), getString(R.string.data_incorrect), null, null);
@@ -311,29 +308,19 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     }
 
     @Override
-    public void setBanner(List<BannerResponse> bannerResponses) {
-        banerList = null;
-        banerList = new ArrayList<BannerResponse>();
-        banerList.addAll(bannerResponses);
-        recyclerView.setAdapter(new AdvertiseRecycleViewAdapter(banerList));
-
-        getAllSpecialOffer();
-    }
-
-    @Override
     public void setSpecialOffer(List<SpecialOfferResponse> specialOfferResponses) {
         buildRecycleView(specialOfferResponses);
     }
 
     private void buildRecycleView(final List<SpecialOfferResponse> specialOfferResponses) {
-
         recyclerViewSuggestion = (RecyclerView) findViewById(R.id.suggestion_list);
         layoutManagerSuggestion = new LinearLayoutManager(this);
         recyclerViewSuggestion.setLayoutManager(layoutManagerSuggestion);
-        mAdapter = new SuggestionAdapter(specialOfferResponses);
-        specialOfferList = specialOfferResponses;
-        recyclerViewSuggestion.setAdapter(mAdapter);
 
+        specialOfferList = specialOfferResponses;
+        mAdapter = new SuggestionAdapter(specialOfferResponses);
+        recyclerViewSuggestion.setAdapter(mAdapter);
+        layoutManagerSuggestion.scrollToPositionWithOffset(firstVisiblePositionSuggestion, pageNumSuggestion);
 
         mAdapter.setOnitemclickListener(new SuggestionAdapter.OnItemClickListener() {
             @Override
@@ -362,6 +349,31 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 callSetNotif(specialOfferResponses.get(position));
             }
         });
+
+        scrollListenerSuggestion = new EndlessRecyclerViewScrollListener(layoutManagerSuggestion) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                firstVisiblePositionSuggestion = layoutManagerSuggestion.findFirstVisibleItemPosition();
+                findFirstCompletelyVisibleItemPositionSuggestion = layoutManagerSuggestion.findFirstCompletelyVisibleItemPosition();
+                findLastVisibleItemPositionSuggestion = layoutManagerSuggestion.findLastVisibleItemPosition();
+                findLastCompletelyVisibleItemPositionSuggestion = layoutManagerSuggestion.findLastCompletelyVisibleItemPosition();
+                if (!(specialOfferList.size()<10)) {
+                    getAllSpecialOffer(page , 10);
+//                    getAllSpecialOfferImage(page, 10);
+                }
+            }
+        };
+        // Adds the scroll listener to RecyclerView
+        recyclerViewSuggestion.addOnScrollListener(scrollListenerSuggestion);
+
+//        getAllSpecialOfferImage(pageNumSuggestion, 10);
+    }
+    public void setBanner() {
+        recyclerView = (RecyclerView) findViewById(R.id.advertise_list);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new AdvertiseRecycleViewAdapter(banerList));
+        mActivityMainBinding.indicator.attachToRecyclerView(recyclerView, 50);
     }
 
     private void callSetNotif(SpecialOfferResponse specialOfferResponse) {
@@ -370,7 +382,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
             HashMap<String, String> map = new HashMap<>();
             map.put(REQUEST_KEY_STUFF_BRAND_ID, specialOfferResponse.getID());
             map.put(REQUEST_KEY_USER_ID, mMainViewModel.getDataManager().getUserId());
-            map.put(REQUEST_KEY_CREATE_REQUEST, persianCalendar.getPersianYear()+"/"+persianCalendar.getPersianMonth()+"/"+persianCalendar.getPersianDay());
+            map.put(REQUEST_KEY_CREATE_REQUEST, persianCalendar.getPersianYear() + "/" + persianCalendar.getPersianMonth() + "/" + persianCalendar.getPersianDay());
             if (LOGTRUE)
                 Log.d("mPARAMS Category :::::::: ", map.toString());
             mMainViewModel.setNotif(iCallApi, this, map);
@@ -398,8 +410,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
             numberShopping.setVisibility(View.GONE);
             numberShopping.setText(String.valueOf(0));
         }
-        getAllBanerList();
-//        getAllSpecialOffer();
     }
 
     @Override

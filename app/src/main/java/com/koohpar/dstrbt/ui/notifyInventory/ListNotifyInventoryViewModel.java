@@ -31,7 +31,7 @@ public class ListNotifyInventoryViewModel extends BaseViewModel<ListNotifyInvent
 
     public void getNitifyInventoryList(ListNotifyInventoryActivity context, ICallApi iCallApi, HashMap<String, String> map) {
         try {
-            BaseCallback baseCallback = new BaseCallback(context, true, iCallApi, getDataManager(), API_CALL_GET_NOTIFY_INVENTORY_LIST, this);
+            BaseCallback baseCallback = new BaseCallback(context, false, iCallApi, getDataManager(), API_CALL_GET_NOTIFY_INVENTORY_LIST, this);
             iCallApi.getNotifyInventory(map).enqueue(baseCallback);
             setIsLoading(true);
         } catch (Exception e) {

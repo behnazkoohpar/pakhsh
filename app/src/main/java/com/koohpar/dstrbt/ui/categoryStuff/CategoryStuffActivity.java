@@ -3,8 +3,10 @@ package com.koohpar.dstrbt.ui.categoryStuff;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
 
@@ -16,11 +18,13 @@ import com.koohpar.dstrbt.databinding.ActivityCategoryStuffBinding;
 import com.koohpar.dstrbt.ui.base.BaseActivity;
 import com.koohpar.dstrbt.utils.AppConstants;
 import com.koohpar.dstrbt.utils.CommonUtils;
+import com.koohpar.dstrbt.utils.EndlessRecyclerViewScrollListener;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,7 +43,15 @@ public class CategoryStuffActivity extends BaseActivity<ActivityCategoryStuffBin
     private RecyclerView recyclerViewCategoryStuff;
     private LinearLayoutManager layoutManagerCategoryStuff;
     private CategoryStuffAdapter mAdapter;
-    private List<CategoryStuffResponse> categoryStuffList;
+    private List<CategoryStuffResponse> categoryStuffList = new ArrayList<>();
+    private EndlessRecyclerViewScrollListener scrollListenerSuggestion;
+
+    private int firstVisiblePositionSuggestion;
+    private int findFirstCompletelyVisibleItemPositionSuggestion;
+    private int findLastVisibleItemPositionSuggestion;
+    private int findLastCompletelyVisibleItemPositionSuggestion;
+    private int pageNum = 0;
+    private int next = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +59,22 @@ public class CategoryStuffActivity extends BaseActivity<ActivityCategoryStuffBin
         mActivityCategoryStuffBinding = getViewDataBinding();
         mCategoryStuffViewModel.setNavigator(this);
         mCategoryStuffViewModel.setActivity(CategoryStuffActivity.this);
+        recyclerViewCategoryStuff = (RecyclerView) findViewById(R.id.category_stuff_list);
+        layoutManagerCategoryStuff = new LinearLayoutManager(this);
+        recyclerViewCategoryStuff.setLayoutManager(layoutManagerCategoryStuff);
+        mAdapter = new CategoryStuffAdapter(categoryStuffList);
+        recyclerViewCategoryStuff.setAdapter(mAdapter);
+
         if (CategoryId != null)
-            callGetStuffListFromCategory();
-        if(BrandId != null)
+            callGetStuffListFromCategory(next);
+        if (BrandId != null)
             callGetStuffListFromBrand();
-        if(Search != null)
+        if (Search != null)
             callCategoryStuffBySearch();
     }
 
-    public static Intent getStartIntent(Context context, String categoryId,String brandId,String search) {
-        BrandId =brandId;
+    public static Intent getStartIntent(Context context, String categoryId, String brandId, String search) {
+        BrandId = brandId;
         CategoryId = categoryId;
         Search = search;
         Intent intent = new Intent(context, CategoryStuffActivity.class);
@@ -78,10 +96,10 @@ public class CategoryStuffActivity extends BaseActivity<ActivityCategoryStuffBin
         return R.layout.activity_category_stuff;
     }
 
-    private void callCategoryStuffBySearch(){
+    private void callCategoryStuffBySearch() {
         try {
             HashMap<String, String> map = new HashMap<>();
-            map.put(REQUEST_KEY_SEARCH,"%"+Search+"%");
+            map.put(REQUEST_KEY_SEARCH, "%" + Search + "%");
             if (LOGTRUE)
                 Log.d("mPARAMS Search :::::::: ", map.toString());
             mCategoryStuffViewModel.getSearchKeyword(iCallApi, this, map);
@@ -91,9 +109,11 @@ public class CategoryStuffActivity extends BaseActivity<ActivityCategoryStuffBin
         }
     }
 
-    private void callGetStuffListFromCategory() {
+    private void callGetStuffListFromCategory(int next) {
         try {
             HashMap<String, String> map = new HashMap<>();
+            map.put(REQUEST_KEY_OFFSER, String.valueOf(pageNum));
+            map.put(REQUEST_KEY_NEXT, String.valueOf(next));
             map.put(REQUEST_KEY_CATEGORY_ID, CategoryId);
             if (LOGTRUE)
                 Log.d("mPARAMS Category :::::::: ", map.toString());
@@ -103,9 +123,12 @@ public class CategoryStuffActivity extends BaseActivity<ActivityCategoryStuffBin
             e.printStackTrace();
         }
     }
+
     private void callGetStuffListFromBrand() {
         try {
             HashMap<String, String> map = new HashMap<>();
+            map.put(REQUEST_KEY_OFFSER, String.valueOf(pageNum));
+            map.put(REQUEST_KEY_NEXT, String.valueOf(next));
             map.put(REQUEST_KEY_BRAND_ID, BrandId);
             if (LOGTRUE)
                 Log.d("mPARAMS Category :::::::: ", map.toString());
@@ -123,12 +146,10 @@ public class CategoryStuffActivity extends BaseActivity<ActivityCategoryStuffBin
 
     private void buildRecycleView(final List<CategoryStuffResponse> categoryStuffResponses) {
 
-        recyclerViewCategoryStuff = (RecyclerView) findViewById(R.id.category_stuff_list);
-        layoutManagerCategoryStuff = new LinearLayoutManager(this);
-        recyclerViewCategoryStuff.setLayoutManager(layoutManagerCategoryStuff);
-        mAdapter = new CategoryStuffAdapter(categoryStuffResponses);
-        categoryStuffList =categoryStuffResponses;
-        recyclerViewCategoryStuff.setAdapter(mAdapter);
+        categoryStuffList.addAll(categoryStuffResponses);
+        mAdapter.notifyDataSetChanged();
+        layoutManagerCategoryStuff.scrollToPositionWithOffset(firstVisiblePositionSuggestion, pageNum);
+        pageNum = pageNum + next;
 
         mAdapter.setOnitemclickListener(new CategoryStuffAdapter.OnItemClickListener() {
             @Override
@@ -150,6 +171,22 @@ public class CategoryStuffActivity extends BaseActivity<ActivityCategoryStuffBin
                 callSetNotif(categoryStuffResponses.get(position));
             }
         });
+
+        scrollListenerSuggestion = new EndlessRecyclerViewScrollListener(layoutManagerCategoryStuff) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                firstVisiblePositionSuggestion = layoutManagerCategoryStuff.findFirstVisibleItemPosition();
+                findFirstCompletelyVisibleItemPositionSuggestion = layoutManagerCategoryStuff.findFirstCompletelyVisibleItemPosition();
+                findLastVisibleItemPositionSuggestion = layoutManagerCategoryStuff.findLastVisibleItemPosition();
+                findLastCompletelyVisibleItemPositionSuggestion = layoutManagerCategoryStuff.findLastCompletelyVisibleItemPosition();
+                if ((categoryStuffList.size() % 10) == 0 && findLastVisibleItemPositionSuggestion<categoryStuffList.size())
+                    callGetStuffListFromCategory(next);
+
+            }
+        };
+        // Adds the scroll listener to RecyclerView
+        recyclerViewCategoryStuff.addOnScrollListener(scrollListenerSuggestion);
+
     }
 
     private void callSetNotif(CategoryStuffResponse categoryStuffResponse) {
@@ -158,7 +195,7 @@ public class CategoryStuffActivity extends BaseActivity<ActivityCategoryStuffBin
             HashMap<String, String> map = new HashMap<>();
             map.put(REQUEST_KEY_STUFF_BRAND_ID, categoryStuffResponse.getID());
             map.put(REQUEST_KEY_USER_ID, mCategoryStuffViewModel.getDataManager().getUserId());
-            map.put(REQUEST_KEY_CREATE_REQUEST, persianCalendar.getPersianYear()+"/"+persianCalendar.getPersianMonth()+"/"+persianCalendar.getPersianDay());
+            map.put(REQUEST_KEY_CREATE_REQUEST, persianCalendar.getPersianYear() + "/" + persianCalendar.getPersianMonth() + "/" + persianCalendar.getPersianDay());
             if (LOGTRUE)
                 Log.d("mPARAMS Category :::::::: ", map.toString());
             mCategoryStuffViewModel.setNotif(iCallApi, this, map);

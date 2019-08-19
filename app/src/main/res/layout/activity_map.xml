@@ -3,22 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/backgroundPage"
     tools:context="com.koohpar.dstrbt.ui.map.MapActivity">
 
     <RelativeLayout
         android:id="@+id/titr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/textView4"
-            style="@style/AppTheme.font"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:padding="@dimen/padding_large"
-            android:text="" />
+            android:background="@drawable/main_header_selector">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextViewTitleWhite"
+                android:layout_centerInParent="true"
+                android:text="@string/map"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_large"
+                android:textStyle="bold" />
+
 
         <ImageView
             android:id="@+id/back"
@@ -27,7 +35,9 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_large"
             android:src="@drawable/back_icon"
+            android:tint="@color/white"
             android:layout_alignParentLeft="true"/>
+        </RelativeLayout>
 
     </RelativeLayout>
 

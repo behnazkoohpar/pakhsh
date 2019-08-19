@@ -8,6 +8,7 @@ import com.koohpar.dstrbt.R;
 import com.koohpar.dstrbt.api.BaseCallback;
 import com.koohpar.dstrbt.api.ICallApi;
 import com.koohpar.dstrbt.data.DataManager;
+import com.koohpar.dstrbt.data.model.api.BannerResponse;
 import com.koohpar.dstrbt.data.model.api.GetLastVersionResponse;
 import com.koohpar.dstrbt.data.model.api.base.Data;
 import com.koohpar.dstrbt.ui.base.BaseViewModel;
@@ -51,7 +52,16 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> implements A
             e.printStackTrace();
         }
     }
-
+    public void getBanerList(ICallApi iCallApi, SplashActivity context, HashMap<String, String> map) {
+        try {
+            BaseCallback baseCallback = new BaseCallback(context, false, iCallApi, getDataManager(), API_CALL_ALL_BANER_LIST, this);
+            iCallApi.getAllBanerList(map).enqueue(baseCallback);
+            setIsLoading(true);
+        } catch (Exception e) {
+            CommonUtils.showSingleButtonAlert(mActivity, mActivity.getString(R.string.text_attention), mActivity.getString(R.string.not_can_call), null, null);
+            e.printStackTrace();
+        }
+    }
     public void login(ICallApi iCallApi, SplashActivity context, HashMap<String, String> map) {
         try {
             BaseCallback baseCallback = new BaseCallback(context, true, iCallApi, getDataManager(), API_CALL_LOGIN, this);
@@ -78,10 +88,14 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> implements A
                         if (!getLastVersionResponses.get(0).getAndroidVersion().isEmpty() && Integer.parseInt(getLastVersionResponses.get(0).getAndroidVersion()) > version) {
                             getNavigator().invokeVersion(getLastVersionResponses.get(0).getAndroidFilePath());
                         } else
-                            getNavigator().decideNextActivity();
+                            getNavigator().getAllBanerList();
                         break;
                     case API_CALL_LOGIN:
                         getNavigator().openMainActivity();
+                        break;
+                    case API_CALL_ALL_BANER_LIST:
+                        List<BannerResponse> bannerResponses = data.getData();
+                        getNavigator().setBanner(bannerResponses);
                         break;
                 }
             }

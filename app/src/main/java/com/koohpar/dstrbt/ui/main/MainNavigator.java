@@ -11,7 +11,6 @@ import java.util.List;
  */
 
 public interface MainNavigator {
-    void setBanner(List<BannerResponse> bannerResponses);
     void setSpecialOffer(List<SpecialOfferResponse> specialOfferResponses);
     void callSearch();
 }

@@ -74,7 +74,6 @@
     </style>
     <style name="AppTheme.TextViewTitleWhite"  >
         <!-- Customize your theme here. -->
-        <item name="android:background">@drawable/bg_btn_color_primary</item>
         <item name="android:fontFamily">@font/iran_sans</item>
         <item name="android:textSize">@dimen/font_size_large</item>
         <item name="android:textColor">@color/black_effective</item>
@@ -92,7 +91,6 @@
 
     <style name="AppTheme.TextViewTitleMain"  >
         <!-- Customize your theme here. -->
-        <item name="android:background">@drawable/bg_btn_color_primary</item>
         <item name="android:fontFamily">@font/iran_sans</item>
         <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:textColor">@color/black_effective</item>
@@ -141,7 +139,6 @@
 
     <style name="AppTheme.TextViewTitrWhite" >
         <!-- Customize your theme here. -->
-        <item name="android:background">@drawable/bg_btn_color_primary</item>
         <item name="android:fontFamily">@font/iran_sans</item>
         <item name="android:textSize">@dimen/font_size_xxlarge</item>
         <item name="android:textColor">@color/black_effective</item>

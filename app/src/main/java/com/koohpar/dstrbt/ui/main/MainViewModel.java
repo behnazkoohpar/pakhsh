@@ -39,19 +39,6 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements AppCo
         getNavigator().callSearch();
     }
 
-
-
-    public void getBanerList(ICallApi iCallApi, MainActivity context, HashMap<String, String> map) {
-        try {
-            BaseCallback baseCallback = new BaseCallback(context, false, iCallApi, getDataManager(), API_CALL_ALL_BANER_LIST, this);
-            iCallApi.getAllBanerList(map).enqueue(baseCallback);
-            setIsLoading(true);
-        } catch (Exception e) {
-            CommonUtils.showSingleButtonAlert(mActivity, mActivity.getString(R.string.text_attention), mActivity.getString(R.string.not_can_call), null, null);
-            e.printStackTrace();
-        }
-    }
-
     public void getAllSpecialOffer(ICallApi iCallApi, MainActivity context, HashMap<String, String> map) {
         try {
             BaseCallback baseCallback = new BaseCallback(context, false, iCallApi, getDataManager(), API_CALL_ALL_SPECIAL_OFFER, this);
@@ -84,10 +71,7 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements AppCo
                 CommonUtils.showSingleButtonAlert(mActivity, mActivity.getString(R.string.text_attention), data.getSettings().getMessage(), null, null);
             } else {
                 switch (requestCode) {
-                    case API_CALL_ALL_BANER_LIST:
-                        List<BannerResponse> bannerResponses = data.getData();
-                        getNavigator().setBanner(bannerResponses);
-                        break;
+
                     case API_CALL_ALL_SPECIAL_OFFER:
                         List<SpecialOfferResponse> specialOfferResponses = data.getData();
                         getNavigator().setSpecialOffer(specialOfferResponses);
@@ -114,6 +98,4 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements AppCo
         setIsLoading(false);
         CommonUtils.showSingleButtonAlert(mActivity, mActivity.getString(R.string.text_attention), mActivity.getString(R.string.authentication_failed), mActivity.getString(R.string.btn_ok), null);
     }
-
-
 }

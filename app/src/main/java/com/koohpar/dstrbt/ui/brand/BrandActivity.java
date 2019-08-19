@@ -14,6 +14,7 @@ import com.koohpar.dstrbt.databinding.ActivityBrandBinding;
 import com.koohpar.dstrbt.ui.base.BaseActivity;
 import com.koohpar.dstrbt.utils.AppConstants;
 import com.koohpar.dstrbt.utils.CommonUtils;
+import com.koohpar.dstrbt.utils.EndlessRecyclerViewScrollListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +31,15 @@ public class BrandActivity extends BaseActivity<ActivityBrandBinding, BrandViewM
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private ArrayList<BrandResponse> banerList= new ArrayList<>();
+    private EndlessRecyclerViewScrollListener scrollListenerSuggestion;
+
+    private int firstVisiblePositionSuggestion;
+    private int findFirstCompletelyVisibleItemPositionSuggestion;
+    private int findLastVisibleItemPositionSuggestion;
+    private int findLastCompletelyVisibleItemPositionSuggestion;
+    private int pageNum = 0;
+    private int next = 10;
+    private BrandRecycleViewAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +48,15 @@ public class BrandActivity extends BaseActivity<ActivityBrandBinding, BrandViewM
         mBrandViewModel.setNavigator(this);
         mBrandViewModel.setActivity(BrandActivity.this);
         initView();
-        callGetAllBrand();
+        callGetAllBrand(next);
     }
 
     private void initView() {
         recyclerView = (RecyclerView) findViewById(R.id.brand_list);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+        mAdapter = new BrandRecycleViewAdapter(banerList);
+        recyclerView.setAdapter(mAdapter);
     }
 
     public static Intent getStartIntent(Context context) {
@@ -67,9 +79,11 @@ public class BrandActivity extends BaseActivity<ActivityBrandBinding, BrandViewM
         return R.layout.activity_brand;
     }
 
-    private void callGetAllBrand() {
+    private void callGetAllBrand(int next) {
         try {
             HashMap<String, String> map = new HashMap<>();
+            map.put(REQUEST_KEY_OFFSER, String.valueOf(pageNum));
+            map.put(REQUEST_KEY_NEXT, String.valueOf(next));
             if (LOGTRUE)
                 Log.d("mPARAMS Brand :::::::: ", map.toString());
             mBrandViewModel.getAllBrand(iCallApi, this, map);
@@ -81,8 +95,23 @@ public class BrandActivity extends BaseActivity<ActivityBrandBinding, BrandViewM
 
     @Override
     public void setBrand(List<BrandResponse> brandResponses) {
-
         banerList.addAll(brandResponses);
-        recyclerView.setAdapter(new BrandRecycleViewAdapter(banerList));
+        mAdapter.notifyDataSetChanged();
+        layoutManager.scrollToPositionWithOffset(firstVisiblePositionSuggestion, pageNum);
+        pageNum = pageNum + next;
+        scrollListenerSuggestion = new EndlessRecyclerViewScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                firstVisiblePositionSuggestion = layoutManager.findFirstVisibleItemPosition();
+                findFirstCompletelyVisibleItemPositionSuggestion = layoutManager.findFirstCompletelyVisibleItemPosition();
+                findLastVisibleItemPositionSuggestion = layoutManager.findLastVisibleItemPosition();
+                findLastCompletelyVisibleItemPositionSuggestion = layoutManager.findLastCompletelyVisibleItemPosition();
+                if ((banerList.size() % 10) == 0 && findLastVisibleItemPositionSuggestion<banerList.size())
+                    callGetAllBrand(next);
+
+            }
+        };
+        // Adds the scroll listener to RecyclerView
+        recyclerView.addOnScrollListener(scrollListenerSuggestion);
     }
 }

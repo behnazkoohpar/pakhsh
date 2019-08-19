@@ -35,7 +35,7 @@ public class BrandViewModel extends BaseViewModel<BrandNavigator> implements App
 
     public void getAllBrand(ICallApi iCallApi, BrandActivity context, HashMap<String, String> map) {
         try {
-            BaseCallback baseCallback = new BaseCallback(context, true, iCallApi, getDataManager(), API_CALL_ALL_BRAND, this);
+            BaseCallback baseCallback = new BaseCallback(context, false, iCallApi, getDataManager(), API_CALL_ALL_BRAND, this);
             iCallApi.getAllBrand(map).enqueue(baseCallback);
             setIsLoading(true);
         } catch (Exception e) {

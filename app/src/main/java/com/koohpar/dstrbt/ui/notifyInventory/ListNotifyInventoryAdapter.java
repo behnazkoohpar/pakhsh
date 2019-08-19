@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.koohpar.dstrbt.R;
 import com.koohpar.dstrbt.data.model.api.CategoryStuffResponse;
-import com.koohpar.dstrbt.data.model.api.database.StuffSelected;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -31,8 +30,6 @@ public class ListNotifyInventoryAdapter extends RecyclerView.Adapter<ListNotifyI
 
     public interface OnItemClickListener {
         void onIncreaseClick(int position);
-
-        void onNotifClick(int position);
     }
 
     public void setOnitemclickListener(ListNotifyInventoryAdapter.OnItemClickListener onitemclickListener) {
@@ -42,7 +39,7 @@ public class ListNotifyInventoryAdapter extends RecyclerView.Adapter<ListNotifyI
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView imageView, shopping;
-        public final TextView price, name, percent, sale, callMe, numbercarton, offer;
+        public final TextView price, name, percent, sale, numbercarton, offer;
 
         public ViewHolder(final View itemView, final ListNotifyInventoryAdapter.OnItemClickListener listener) {
             super(itemView);
@@ -54,7 +51,6 @@ public class ListNotifyInventoryAdapter extends RecyclerView.Adapter<ListNotifyI
             percent = (TextView) itemView.findViewById(R.id.percent);
             shopping = (ImageView) itemView.findViewById(R.id.shopping);
             sale = (TextView) itemView.findViewById(R.id.sale);
-            callMe = (TextView) itemView.findViewById(R.id.callMe);
 
             shopping.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -65,17 +61,6 @@ public class ListNotifyInventoryAdapter extends RecyclerView.Adapter<ListNotifyI
                             shopping.setVisibility(View.GONE);
                             listener.onIncreaseClick(position);
 
-                        }
-                    }
-                }
-            });
-            callMe.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onNotifClick(position);
                         }
                     }
                 }
@@ -102,14 +87,8 @@ public class ListNotifyInventoryAdapter extends RecyclerView.Adapter<ListNotifyI
         viewHolder.sale.setText(numberFormat.format(Integer.parseInt(stList.get(position).getConsumerPrice())));
         viewHolder.name.setText(this.stList.get(position).getStuffName() + " " + this.stList.get(position).getBrandName());
         if (Integer.parseInt(this.stList.get(position).getLastStock()) < Integer.parseInt(this.stList.get(position).getMinimumStuck())) {
-            viewHolder.callMe.setVisibility(View.VISIBLE);
             viewHolder.shopping.setVisibility(View.GONE);
         }
-        if (StuffSelected.findByGUID(this.stList.get(position).getID()) == null)
-            viewHolder.shopping.setVisibility(this.stList.get(position).getVisibility());
-        else
-            viewHolder.shopping.setVisibility(View.GONE);
-        viewHolder.callMe.setVisibility(View.GONE);
     }
 
     public int getItemCount() {

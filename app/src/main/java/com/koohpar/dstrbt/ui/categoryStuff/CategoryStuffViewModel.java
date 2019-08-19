@@ -35,7 +35,7 @@ public class CategoryStuffViewModel extends BaseViewModel<CategoryStuffNavigator
 
     public void getAllCategoryStuff(ICallApi iCallApi, CategoryStuffActivity context, HashMap<String, String> map) {
         try {
-            BaseCallback baseCallback = new BaseCallback(context, true, iCallApi, getDataManager(), API_CALL_ALL_CATEGORY_STUFF, this);
+            BaseCallback baseCallback = new BaseCallback(context, false, iCallApi, getDataManager(), API_CALL_ALL_CATEGORY_STUFF, this);
             iCallApi.getAllCategoryStuff(map).enqueue(baseCallback);
             setIsLoading(true);
         } catch (Exception e) {

@@ -15,12 +15,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:background="@drawable/main_header_selector">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
                 style="@style/AppTheme.TextViewTitleWhite"
                 android:layout_centerInParent="true"
                 android:text="ارتباط با ما"
-                android:textColor="@color/black_effective"
+                android:textColor="@color/white"
                 android:textSize="@dimen/font_size_large"
                 android:textStyle="bold" />
         </RelativeLayout>
@@ -54,7 +54,7 @@
                     android:layout_marginRight="20dp"
                     style="@style/AppTheme.TextViewTitleWhite"
                     android:layout_marginTop="20dp"
-                    android:text="سامانه پخش بهشرق تحت برند ساتک"
+                    android:text="سامانه پخش خورجین تحت برند ساتک"
                     android:textColor="@color/black_effective"
                     android:textSize="@dimen/font_size_large"
                     android:textStyle="bold" />

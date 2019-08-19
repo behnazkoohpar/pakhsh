@@ -13,15 +13,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 
 import com.koohpar.dstrbt.BR;
 import com.koohpar.dstrbt.BuildConfig;
 import com.koohpar.dstrbt.R;
 import com.koohpar.dstrbt.data.DataManager;
+import com.koohpar.dstrbt.data.model.api.BannerResponse;
 import com.koohpar.dstrbt.databinding.ActivitySplashBinding;
 import com.koohpar.dstrbt.ui.base.BaseActivity;
 import com.koohpar.dstrbt.ui.login.LoginActivity;
+import com.koohpar.dstrbt.ui.main.AdvertiseRecycleViewAdapter;
 import com.koohpar.dstrbt.ui.main.MainActivity;
 import com.koohpar.dstrbt.utils.AppConstants;
 import com.koohpar.dstrbt.utils.CommonUtils;
@@ -33,7 +38,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -47,6 +54,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
     @Inject
     SplashViewModel mSplashViewModel;
     private ProgressDialog dialogBar;
+    public static List<BannerResponse> banerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +93,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
         public void run() {
             try {
                 if (checkConnectivity(SplashActivity.this)) {
+                    stopCheck();
                     callGetLastVersion();
 //                    decideNextActivity();
                 } else {
@@ -97,6 +106,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
     };
 
     private void callGetLastVersion() {
+        stopCheck();
         try {
             HashMap<String, String> map = new HashMap<>();
             mSplashViewModel.callGetlastVersion(iCallApi, this, map);
@@ -105,7 +115,19 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
             e.printStackTrace();
         }
     }
-
+    @Override
+    public void getAllBanerList() {
+        stopCheck();
+        try {
+            HashMap<String, String> map = new HashMap<>();
+            if (LOGTRUE)
+                Log.d("mPARAMS BanerList :::::::: ", map.toString());
+            mSplashViewModel.getBanerList(iCallApi, this, map);
+        } catch (Exception e) {
+            CommonUtils.showSingleButtonAlert(this, getString(R.string.text_attention), getString(R.string.data_incorrect), null, null);
+            e.printStackTrace();
+        }
+    }
     public boolean checkConnectivity(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -231,13 +253,18 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
                             Manifest.permission.READ_EXTERNAL_STORAGE,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE
                     }, 1000);
-            decideNextActivity();
+            getAllBanerList();
         } else {
             new UpdateApp().execute(url);
         }
 
     }
 
+    @Override
+    public void setBanner(List<BannerResponse> bannerResponses) {
+        banerList = bannerResponses;
+        decideNextActivity();
+    }
     private class UpdateApp extends AsyncTask<String, String, Void> {
 
         @Override

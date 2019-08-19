@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorPrimary"
+    android:background="@color/backgroundPage"
     tools:Context="com.koohpar.dstrbt.ui.profile.ProfileActivity">
 
     <data>
@@ -19,16 +19,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
             android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/main_header_selector">
 
-            <TextView
-                style="@style/AppTheme.TextViewTitleWhite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:padding="@dimen/padding_large"
-                android:text="@string/info" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/AppTheme.TextViewTitleWhite"
+                    android:layout_centerInParent="true"
+                    android:text="@string/info"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_large"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,7 +62,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/colorPrimary" />
+                     />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -74,7 +81,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/colorPrimary" />
+                     />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -94,14 +101,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorPrimary" />
+                 />
 
             <LinearLayout
                 android:id="@+id/personLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_normal"
-                android:background="@color/colorPrimary"
                 android:orientation="vertical"
                 android:visibility="@{viewModel.isPersonLayout ? View.VISIBLE : View.GONE}">
 
@@ -245,7 +251,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_normal"
-                android:background="@color/colorPrimary"
+
                 android:orientation="vertical"
                 android:visibility="@{viewModel.isLocationLayout ? View.VISIBLE : View.GONE}">
 
@@ -525,7 +531,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_normal"
-                android:background="@color/colorPrimary"
+
                 android:orientation="vertical"
                 android:visibility="@{viewModel.isInternetLayout ? View.VISIBLE : View.GONE}">
 

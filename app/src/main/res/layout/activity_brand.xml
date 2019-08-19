@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorPrimary"
+    android:background="@color/backgroundPage"
     tools:Context="com.koohpar.dstrbt.ui.brand.BrandActivity">
 
     <data>
@@ -17,27 +17,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <RelativeLayout
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="50dp"
+            android:background="@drawable/main_header_selector">
 
             <TextView
-                style="@style/AppTheme.font"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/AppTheme.TextViewTitleWhite"
                 android:layout_centerInParent="true"
-                android:padding="@dimen/padding_large"
                 android:text="@string/brand"
-                android:textColor="@color/black_effective"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_large"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/brand_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="@color/colorPrimary">
+            android:layout_gravity="right">
 
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>

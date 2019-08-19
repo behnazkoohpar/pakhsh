@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/backgroundPage"
     tools:Context="com.koohpar.dstrbt.ui.categoryStuff.CategoryStuffActivity">
 
     <data>
@@ -15,29 +16,31 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:orientation="vertical"
-      android:background="@color/colorPrimary">
+      android:orientation="vertical">
+
       <RelativeLayout
+          android:id="@+id/toolbar"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@color/colorPrimary">
+          android:layout_height="50dp"
+          android:background="@drawable/main_header_selector">
 
           <TextView
-              style="@style/AppTheme.font"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              style="@style/AppTheme.TextViewTitleWhite"
               android:layout_centerInParent="true"
-              android:padding="@dimen/padding_large"
-              android:textColor="@color/black_effective"
-              android:text="@string/categorylist" />
+              android:text="@string/categorylist"
+              android:textColor="@color/white"
+              android:textSize="@dimen/font_size_large"
+              android:textStyle="bold" />
       </RelativeLayout>
+
       <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/category_stuff_list"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="right"
-          android:layout_marginTop="@dimen/margin_mini_small"
-          android:background="@color/colorPrimary">
+          android:layout_marginTop="@dimen/margin_mini_small">
 
       </androidx.recyclerview.widget.RecyclerView>
 

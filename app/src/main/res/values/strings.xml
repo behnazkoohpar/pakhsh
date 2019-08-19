@@ -130,4 +130,5 @@
     <string name="code">کد معرف</string>
     <string name="code_is_null">کد را وارد کنید</string>
     <string name="notifyInventory">محصولات در انتظار</string>
+    <string name="map">نقشه</string>
 </resources>

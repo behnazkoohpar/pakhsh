@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/backgroundPage"
     tools:Context="com.koohpar.dstrbt.ui.notifyInventory.ListNotifyInventoryActivity">
 
     <data>
@@ -15,28 +16,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
         android:orientation="vertical">
-
         <RelativeLayout
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="50dp"
+            android:background="@drawable/main_header_selector">
 
             <TextView
-                style="@style/AppTheme.font"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/AppTheme.TextViewTitleWhite"
                 android:layout_centerInParent="true"
-                android:padding="@dimen/padding_large"
-                android:text="@string/category"
-                android:textColor="@color/black_effective" />
+                android:text="@string/notifyInventory"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_large"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
             android:divider="#A4C739"
             android:dividerHeight="1dp" />
     </LinearLayout>

@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#b8dfdc</color>
-    <color name="colorPrimaryDark">#12736a</color>
-    <color name="colorAccent">#12736a</color>
+    <color name="colorPrimary">#faaf13</color>
+    <color name="colorPrimaryDark">#ffad04</color>
+    <color name="colorAccent">#014f9a</color>
+    <color name="blue">#014f9a</color>
+    <color name="blue_low">#72cccd</color>
+    <color name="blue_full">#01385e</color>
+    <color name="colorNavigataion">#ffad04</color>
+    <color name="statusBar">#ffad04</color>
     <color name="dark_gray">#909090</color>
     <color name="black_effective">#303030</color>
     <color name="gray">#a9a9a9</color>
     <color name="path_color">#faa519</color>
+    <color name="backgroundPage">#ecebe7</color>
+    <color name="backgroundPageLogin">#dcdcdc</color>
     <color name="red_color">#7e0c18</color>
     <color name="red">#fc0b0b</color>
     <color name="mdtp_accent_color">#7e0c18</color>
